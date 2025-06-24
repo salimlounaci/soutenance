@@ -23,7 +23,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from src.services.extract_text import extract_text_from_pdf
 from src.services.ner_extraction import extract_entities
 from src.services.profil_builder import profil_to_text, construire_profil
-from france_travail_api.get_token import get_access_token 
+ 
 
 load_dotenv()
 
