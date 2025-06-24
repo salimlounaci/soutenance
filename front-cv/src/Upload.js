@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Upload() {
-  const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = "https://jobaibackend-babfbxbae5aeaabz.francecentral-01.azurewebsites.net";
+;
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [cvData, setCvData] = useState(null);

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const API_URL = process.env.REACT_APP_API_URL;  
+  const API_URL = "https://jobaibackend-babfbxbae5aeaabz.francecentral-01.azurewebsites.net";  
 
   console.log("API_URL =", API_URL);
 
