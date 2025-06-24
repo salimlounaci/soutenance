@@ -86,7 +86,7 @@ function Upload() {
     </div>
   );
 }
-export default Upload;
+
 
   const styles = {
     container: {
@@ -187,36 +187,7 @@ export default Upload;
     }
   };
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <img src="/logo.png" alt="Logo JobAI" style={styles.logo} />
-        <h1 style={styles.title}>Bienvenue {user.prenom} {user.nom}</h1>
-        <p style={styles.subtitle}>Téléverse ton CV ici (PDF uniquement)</p>
-        <input
-          type="file"
-          accept=".pdf"
-          onChange={handleFileChange}
-          style={styles.fileInput}
-        />
-        <button onClick={handleUpload} style={styles.button}>Uploader mon CV</button>
 
-        {cvData && (
-          <div style={styles.result}>
-            <div style={styles.resultTitle}>📄 Informations extraites :</div>
-            <div style={styles.resultItem}><strong>Nom :</strong> {cvData.nom}</div>
-            <div style={styles.resultItem}><strong>Email :</strong> {cvData.email}</div>
-            <div style={styles.resultItem}><strong>Téléphone :</strong> {cvData.telephone}</div>
-            <div style={styles.resultItem}><strong>Compétences :</strong> {cvData.competences}</div>
-            <div style={styles.resultItem}><strong>Adresse :</strong> {cvData.adresse}</div>
-            <button onClick={handleGoSwipe} style={styles.swipeButton}>
-              Go Swipe →
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
+export default Upload;
 
 
