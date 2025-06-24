@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const API_URL = process.env.REACT_APP_API_URL;  
 
+  console.log("API_URL =", API_URL);
+
+
   const [isRegistering, setIsRegistering] = useState(false); 
   const [formData, setFormData] = useState({
     prenom: '',
