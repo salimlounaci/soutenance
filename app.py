@@ -223,6 +223,11 @@ def enregistrer_feedback():
         logger.error(f"Erreur d'enregistrement du feedback : {e}")
         return jsonify({'error': str(e)}), 500
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return "OK"
+
+
 # === Run App ===
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
