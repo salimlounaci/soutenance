@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [isRegistering, setIsRegistering] = useState(false); // true = formulaire d'inscription
+  const API_URL = process.env.REACT_APP_API_URL;  
+
+  const [isRegistering, setIsRegistering] = useState(false); 
   const [formData, setFormData] = useState({
     prenom: '',
     nom: '',
@@ -25,52 +27,49 @@ function Login() {
     e.preventDefault();
     const { prenom, nom, email, password } = formData;
 
-   if (isRegistering) {
-  if (prenom && nom && email && password) {
-
-    fetch("http://localhost:5000/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message) {
-          alert(data.message);
-          navigate('/upload');
-        } else {
-          alert(data.error);
-        }
-      });
-  } else {
-    alert('Merci de remplir tous les champs pour créer un compte.');
-  }
-} 
-else {
-    if (email && password) {
-  fetch("http://localhost:5000/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  })
-    .then(res => res.json())
-    .then(data => {
-      if (data.user) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-        alert(data.message);
-        navigate('/upload');
+    if (isRegistering) {
+      if (prenom && nom && email && password) {
+        fetch(`${API_URL}/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.message) {
+              alert(data.message);
+              navigate('/upload');
+            } else {
+              alert(data.error);
+            }
+          });
       } else {
-        alert(data.error);
+        alert('Merci de remplir tous les champs pour créer un compte.');
       }
-    });
-} else {
-  alert('Merci de remplir tous les champs pour vous connecter.');
-}
+    } else {
+      if (email && password) {
+        fetch(`${API_URL}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.user) {
+              localStorage.setItem('user', JSON.stringify(data.user));
+              alert(data.message);
+              navigate('/upload');
+            } else {
+              alert(data.error);
+            }
+          });
+      } else {
+        alert('Merci de remplir tous les champs pour vous connecter.');
+      }
+    }
+  };
 
-  }
-
-};
-
+  // ... le reste inchangé
   return (
     <div style={styles.container}>
       <div style={styles.card}>
@@ -140,6 +139,11 @@ else {
     </div>
   );
 }
+
+
+
+
+
 
 const styles = {
   container: {

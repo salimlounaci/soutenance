@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Upload() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [cvData, setCvData] = useState(null);
   const [user, setUser] = useState({ prenom: '', nom: '', email: '' });
@@ -31,7 +33,7 @@ function Upload() {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch("http://localhost:5000/extract", {
+      const response = await fetch(`${API_URL}/extract`, {
         method: "POST",
         body: formData,
       });
@@ -51,6 +53,40 @@ function Upload() {
   const handleGoSwipe = () => {
     navigate("/swipe");
   };
+
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <img src="/logo.png" alt="Logo JobAI" style={styles.logo} />
+        <h1 style={styles.title}>Bienvenue {user.prenom} {user.nom}</h1>
+        <p style={styles.subtitle}>Téléverse ton CV ici (PDF uniquement)</p>
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleFileChange}
+          style={styles.fileInput}
+        />
+        <button onClick={handleUpload} style={styles.button}>Uploader mon CV</button>
+
+        {cvData && (
+          <div style={styles.result}>
+            <div style={styles.resultTitle}>📄 Informations extraites :</div>
+            <div style={styles.resultItem}><strong>Nom :</strong> {cvData.nom}</div>
+            <div style={styles.resultItem}><strong>Email :</strong> {cvData.email}</div>
+            <div style={styles.resultItem}><strong>Téléphone :</strong> {cvData.telephone}</div>
+            <div style={styles.resultItem}><strong>Compétences :</strong> {cvData.competences}</div>
+            <div style={styles.resultItem}><strong>Adresse :</strong> {cvData.adresse}</div>
+            <button onClick={handleGoSwipe} style={styles.swipeButton}>
+              Go Swipe →
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+export default Upload;
 
   const styles = {
     container: {
@@ -181,6 +217,6 @@ function Upload() {
       </div>
     </div>
   );
-}
 
-export default Upload;
+
+

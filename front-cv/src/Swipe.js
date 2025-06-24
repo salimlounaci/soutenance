@@ -5,7 +5,7 @@ function Swipe() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/offres")
+    fetch(`${process.env.REACT_APP_API_URL}/offres`)
       .then((res) => res.json())
       .then((data) => {
         setOffres(data);
@@ -14,6 +14,7 @@ function Swipe() {
         console.error("Erreur lors de la récupération des offres :", error);
       });
   }, []);
+
 
   const handleLike = () => {
     console.log("💚 J'aime :", offres[index]);
