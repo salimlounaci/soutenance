@@ -1,4 +1,4 @@
-name: Build and deploy Python app to Azure Web App - jobaibackend
+ name: Build and deploy Python app to Azure Web App - jobaibackend
 
 on:
   push:
